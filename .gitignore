@@ -1,0 +1,9 @@
+# Editor and OS files
+.DS_Store
+.idea/
+.vscode/
+
+# Claude Code
+.claude/
+CLAUDE.md
+.codex

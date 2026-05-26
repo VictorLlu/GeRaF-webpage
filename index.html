@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- ============================================================= -->
+  <!-- TEMPLATE — edit the placeholders marked  TODO  to your project -->
+  <!-- ============================================================= -->
+
+  <title>GeRaF | Radio-Frequency 3D Reconstruction</title>
+  <meta name="description"
+        content="GeRaF reconstructs the 3D geometry of objects hidden inside a box using millimeter-wave radar.">
+
+  <!-- Open Graph / social preview — TODO: set the absolute URL of your page + a 1200x630 image -->
+  <meta property="og:title" content="GeRaF | Radio-Frequency 3D Reconstruction">
+  <meta property="og:description"
+        content="Non-line-of-sight 3D reconstruction with millimeter-wave radar.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="static/images/og_preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicon — TODO: drop a favicon at static/images/favicon.ico -->
+  <link rel="icon" href="static/images/favicon.ico">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap"
+        rel="stylesheet">
+
+  <!-- Bulma + icon packs (same stack the academic-project-page template uses) -->
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <!-- Three.js for interactive STL viewers (loaded lazily by stl-viewer.js).
+       Pinned to a stable version; bump as needed. -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three":          "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/":  "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+
+<body>
+
+<!-- =================================================================== -->
+<!-- HERO                                                                -->
+<!-- =================================================================== -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop has-text-centered">
+
+      <div class="publication-lockup" aria-label="GeRaF">
+        <img class="publication-logo" src="static/images/geraflogo.svg" alt="" aria-hidden="true">
+        <h1 class="title is-1 publication-title">
+          GeRaF
+        </h1>
+      </div>
+      <h2 class="subtitle publication-subtitle">
+        Neural Geometry Reconstruction from Radio Frequency Signals
+      </h2>
+
+      <!-- ===== Authors (shared across both papers) ===== -->
+      <div class="publication-authors">
+        <span class="author-block">
+          <a href="#">Jiachen Lu</a><sup>*</sup>,
+        </span>
+        <span class="author-block">
+          <a href="#">Hailan Shanbhag</a><sup>*</sup>,
+        </span>
+        <span class="author-block">
+          <a href="#">Haitham Al Hassanieh</a>
+        </span>
+      </div>
+
+      <!-- ===== Affiliations ===== -->
+      <div class="publication-affiliations">
+        <span class="affiliation-block">École Polytechnique Fédérale de Lausanne (EPFL)</span>
+      </div>
+      <div class="publication-note">
+        <span><sup>*</sup> Equal contribution</span>
+      </div>
+
+      <!-- ===== Papers in the GeRaF series — each card carries its own links ===== -->
+      <div class="papers-block">
+        <article class="paper-row paper-row-featured">
+          <div class="paper-meta">
+            <span class="paper-alias">GeRaF 2.0</span>
+            <span class="venue-badge venue-cvpr">
+              <i class="fas fa-trophy" aria-hidden="true"></i> CVPR 2026
+            </span>
+          </div>
+          <p class="paper-title-line">
+            Seeing through boxes: Non-Line-of-Sight 3D Reconstruction from Radar Signals
+          </p>
+          <div class="paper-row-links">
+            <a href="#" class="link-button"><i class="fas fa-file-pdf"></i> Paper</a>
+            <a href="#" class="link-button"><i class="ai ai-arxiv"></i> arXiv</a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdfJQmYddJuTSxko5VJfQSRZ8cOTboSk-xa3A4oe7j-Bd_g-w/viewform?usp=publish-editor" target="_blank" rel="noopener" class="link-button"><i class="fab fa-github"></i> Code</a>
+          </div>
+        </article>
+        <article class="paper-row">
+          <div class="paper-meta">
+            <span class="paper-alias">GeRaF 1.0</span>
+            <span class="venue-badge venue-neurips">
+              <i class="fas fa-trophy" aria-hidden="true"></i> NeurIPS 2025 <em>Spotlight</em>
+            </span>
+          </div>
+          <p class="paper-title-line">
+            GeRaF: Neural Geometry Reconstruction from Radio-Frequency Signals
+          </p>
+          <div class="paper-row-links">
+            <a href="https://openreview.net/pdf?id=z3PMVmzoya" target="_blank" rel="noopener" class="link-button"><i class="fas fa-file-pdf"></i> Paper</a>
+            <a href="#" class="link-button"><i class="ai ai-arxiv"></i> arXiv</a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdfJQmYddJuTSxko5VJfQSRZ8cOTboSk-xa3A4oe7j-Bd_g-w/viewform?usp=publish-editor" target="_blank" rel="noopener" class="link-button"><i class="fab fa-github"></i> Code</a>
+          </div>
+        </article>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =================================================================== -->
+<!-- TEASER                                                              -->
+<!-- =================================================================== -->
+<section class="section teaser-section">
+  <div class="container is-max-desktop">
+    <!--
+      Right-to-left infinite marquee. JS auto-clones the clips so adding
+      more objects is just one more <video> tag.
+    -->
+    <div class="teaser-marquee" id="teaser-marquee">
+      <div class="teaser-marquee-track">
+        <video class="teaser-clip" autoplay muted loop playsinline preload="auto">
+          <source src="static/videos/bunnyboxv1.mp4" type="video/mp4">
+        </video>
+        <video class="teaser-clip" autoplay muted loop playsinline preload="auto">
+          <source src="static/videos/bunnyboxv2.mp4" type="video/mp4">
+        </video>
+        <video class="teaser-clip" autoplay muted loop playsinline preload="auto">
+          <source src="static/videos/chickenboxv3.mp4" type="video/mp4">
+        </video>
+        <video class="teaser-clip" autoplay muted loop playsinline preload="auto">
+          <source src="static/videos/deerboxv1.mp4" type="video/mp4">
+        </video>
+        <video class="teaser-clip" autoplay muted loop playsinline preload="auto">
+          <source src="static/videos/eleboxv3.mp4" type="video/mp4">
+        </video>
+        <video class="teaser-clip" autoplay muted loop playsinline preload="auto">
+          <source src="static/videos/kiwiboxv3.mp4" type="video/mp4">
+        </video>
+        <video class="teaser-clip" autoplay muted loop playsinline preload="auto">
+          <source src="static/videos/ballboxv3.mp4" type="video/mp4">
+        </video>
+        <video class="teaser-clip" autoplay muted loop playsinline preload="auto">
+          <source src="static/videos/boatboxv3.mp4" type="video/mp4">
+        </video>
+        <!-- Add more <video class="teaser-clip"> ... </video> here. -->
+      </div>
+    </div>
+    <p class="teaser-caption">
+      GeRaF combines <b>line-of-sight</b> and <b>non-line-of-sight</b>, leverages
+      the outside vision geometry to achieve inside-box object surface reconstruction
+      by <b>radio frequency signals</b>.
+    </p>
+  </div>
+</section>
+
+<!-- =================================================================== -->
+<!-- VIDEO (full talk / supplementary)                                   -->
+<!-- =================================================================== -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-title">Video</h2>
+    <div class="video-embed">
+      <iframe src="https://www.youtube.com/embed/EiE2zqjBVkg"
+              title="GeRaF video" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- =================================================================== -->
+<!-- ABSTRACTS                                                           -->
+<!-- =================================================================== -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-title">Abstract</h2>
+
+    <article class="abstract-block">
+      <header class="abstract-block-header">
+        <span class="paper-alias">GeRaF 2.0</span>
+        <span class="venue-badge venue-cvpr">
+          <i class="fas fa-trophy" aria-hidden="true"></i> CVPR 2026
+        </span>
+      </header>
+      <p>
+        <b>Abstract:</b> Modern vision methods reconstruct 3D geometry from multi-view
+        images with remarkable fidelity — but they fundamentally cannot see objects
+        that are hidden from view. We present <b>GeRaF 2.0</b>, a framework for
+        <i>non-line-of-sight 3D reconstruction</i> that uses millimeter-wave radar to
+        image objects sealed inside an opaque box. Because radio-frequency signals
+        penetrate common materials cheaply and safely, radar recovers both the
+        enclosing box and the object inside it. Unlike a camera, a radar array has no
+        aperture — a <i>lensless</i> imaging regime in which the raw signal is
+        indistinguishable from noise. GeRaF 2.0 casts radar reconstruction as a
+        differentiable, physically grounded rendering problem: we sample points along
+        rays, predict a <i>unified line-of-sight signed distance function</i> with an
+        MLP, and simulate the FMCW radar signal to compare against the measured radar
+        image. To resolve the surface-level ambiguity inherent to mixed line-of-sight
+        and non-line-of-sight regions, we anchor the geometry by enforcing consistency
+        between vision- and radar-derived SDFs in the shared line-of-sight region.
+        GeRaF 2.0 recovers accurate surfaces and shapes for both the outer box and
+        the enclosed object.
+      </p>
+    </article>
+
+    <article class="abstract-block">
+      <header class="abstract-block-header">
+        <span class="paper-alias">GeRaF 1.0</span>
+        <span class="venue-badge venue-neurips">
+          <i class="fas fa-trophy" aria-hidden="true"></i> NeurIPS 2025
+        </span>
+      </header>
+      <p>
+        <b>Abstract:</b> <b>GeRaF</b> is the first method to use neural implicit learning
+        for near-range 3D geometry reconstruction from radio frequency (RF) signals.
+        Unlike RGB or LiDAR-based methods, RF sensing can see through occlusion but
+        suffers from low resolution and noise due to its lensless imaging nature.
+        While lenses in RGB imaging constrain sampling to 1D rays, RF signals
+        propagate through the entire space, introducing significant noise and leading
+        to cubic complexity in volumetric rendering. Moreover, RF signals interact
+        with surfaces via specular reflections, requiring fundamentally different
+        modeling. To address these challenges, GeRaF (1) introduces filter-based
+        rendering to suppress irrelevant signals, (2) implements a physics-based RF
+        volumetric rendering pipeline, and (3) proposes a novel lensless sampling and
+        lensless alpha blending strategy that makes full-space sampling feasible
+        during training. By learning signed distance functions, reflectiveness, and
+        signal power through MLPs and trainable parameters, GeRaF takes the first
+        step towards reconstructing millimeter-level geometry from RF signals in
+        real-world settings.
+      </p>
+    </article>
+  </div>
+</section>
+
+<!-- =================================================================== -->
+<!-- METHOD                                                              -->
+<!-- =================================================================== -->
+<section class="section section-alt">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-title">Method</h2>
+
+    <!-- Pipeline figures — one per paper version -->
+    <figure class="figure">
+      <header class="figure-header">
+        <span class="paper-alias">GeRaF 2.0</span>
+        <span class="venue-badge venue-cvpr">
+          <i class="fas fa-trophy" aria-hidden="true"></i> CVPR 2026
+        </span>
+      </header>
+      <img src="static/images/pipeline-2.png" alt="GeRaF 2.0 pipeline overview">
+      <figcaption class="caption">
+        <b>Overall pipeline of GeRaF 2.0.</b> <b>Top:</b> the vision-pretrained SDF on
+        the outside of the box. <b>Bottom:</b> the training pipeline for RF signals.
+        The pipeline begins with lensless sampling. In the first stage of training,
+        we freeze the Reflectivity Network and use the vision-pretrained SDF to
+        adjust transmittance in the ULoS Lensless Rendering module. In the second
+        stage, we use the vision-pretrained SDF to align the relative SDF, thereby
+        addressing the surface ambiguity problem.
+      </figcaption>
+    </figure>
+
+    <figure class="figure">
+      <header class="figure-header">
+        <span class="paper-alias">GeRaF 1.0</span>
+        <span class="venue-badge venue-neurips">
+          <i class="fas fa-trophy" aria-hidden="true"></i> NeurIPS 2025
+        </span>
+      </header>
+      <img src="static/images/pipeline-1.png" alt="GeRaF 1.0 pipeline overview">
+      <figcaption class="caption">
+        <b>Overall pipeline of GeRaF 1.0.</b> (1) Lensless sampling replaces
+        ray-based methods. (2) A neural implicit model predicts geometry,
+        reflectivity, and power. (3) RF volumetric rendering simulates physical
+        signal propagation. (4) Matched filtering produces MF power images
+        (heatmaps). (5) An L2 loss compares the rendered and ground truth power
+        for end-to-end training.
+      </figcaption>
+    </figure>
+
+    <!--
+      Each feature card opens the floating video modal on click. To wire a
+      clip, set data-video to a real file under static/videos/method/.
+      Six cards in a 3×2 grid (two columns on desktop, full width on mobile).
+    -->
+    <div class="columns is-multiline feature-grid">
+      <div class="column is-half">
+        <button class="feature-card"
+                data-open-video-modal
+                data-video="static/videos/method/lensless-radar-imaging.mp4"
+                data-video-title="Lensless radar imaging">
+          <span class="icon feature-icon"><i class="fas fa-satellite-dish"></i></span>
+          <h3 class="feature-title">Lensless radar imaging</h3>
+          <p>
+            A radar array has no aperture, so its raw return is pure noise. A
+            matched filter mixes each FMCW echo with the transmit signal and
+            integrates per-voxel phase across antennas to form an image.
+          </p>
+          <span class="feature-card-play" aria-hidden="true">
+            <i class="fas fa-play"></i> Watch
+          </span>
+        </button>
+      </div>
+      <div class="column is-half">
+        <button class="feature-card"
+                data-open-video-modal
+                data-video="static/videos/method/signal-tracing.mp4"
+                data-video-title="Signal tracing">
+          <span class="icon feature-icon"><i class="fas fa-wave-square"></i></span>
+          <h3 class="feature-title">Signal tracing</h3>
+          <p>
+            To simulate the RF signal we model both the wave and the amplitude.
+            The wave follows from propagation distance; the amplitude decomposes
+            into reflectivity, a Lambertian factor, free-space decay, round-trip
+            transmittance, opacity, and the emitted amplitude.
+          </p>
+          <span class="feature-card-play" aria-hidden="true">
+            <i class="fas fa-play"></i> Watch
+          </span>
+        </button>
+      </div>
+      <div class="column is-half">
+        <button class="feature-card"
+                data-open-video-modal
+                data-video="static/videos/method/lensless-sampling.mp4"
+                data-video-title="Lensless sampling">
+          <span class="icon feature-icon"><i class="fas fa-table-cells"></i></span>
+          <h3 class="feature-title">Lensless sampling</h3>
+          <p>
+            Vision traces one ray per pixel; radar must sample many rays per
+            antenna, incurring cubic time complexity. Lensless sampling shares
+            one volumetric sample set across every antenna so full-space
+            sampling becomes feasible during training.
+          </p>
+          <span class="feature-card-play" aria-hidden="true">
+            <i class="fas fa-play"></i> Watch
+          </span>
+        </button>
+      </div>
+      <div class="column is-half">
+        <button class="feature-card"
+                data-open-video-modal
+                data-video="static/videos/method/lensless-alpha-blending.mp4"
+                data-video-title="Lensless alpha blending">
+          <span class="icon feature-icon"><i class="fas fa-layer-group"></i></span>
+          <h3 class="feature-title">Lensless alpha blending</h3>
+          <p>
+            Each antenna sees a slightly different volume. We correct the
+            shared transmittance by multiplying it with the sigmoid of the SDF
+            evaluated at the antenna's boundary point, keeping per-antenna
+            rendering consistent without re-sampling.
+          </p>
+          <span class="feature-card-play" aria-hidden="true">
+            <i class="fas fa-play"></i> Watch
+          </span>
+        </button>
+      </div>
+      <div class="column is-half">
+        <button class="feature-card"
+                data-open-video-modal
+                data-video="static/videos/method/unified-sdf.mp4"
+                data-video-title="Unified-Line-of-Sight SDF">
+          <span class="icon feature-icon"><i class="fas fa-cube"></i></span>
+          <h3 class="feature-title">Unified-Line-of-Sight SDF</h3>
+          <p>
+            An object inside a box cannot be split simply into inside and
+            outside. We use positive values for free space and negative for
+            both the box shell and the enclosed object — a single SDF spanning
+            line-of-sight and non-line-of-sight regions.
+          </p>
+          <span class="feature-card-play" aria-hidden="true">
+            <i class="fas fa-play"></i> Watch
+          </span>
+        </button>
+      </div>
+      <div class="column is-half">
+        <button class="feature-card"
+                data-open-video-modal
+                data-video="static/videos/method/relative-sdf-alignment.mp4"
+                data-video-title="Relative SDF alignment">
+          <span class="icon feature-icon"><i class="fas fa-link"></i></span>
+          <h3 class="feature-title">Relative SDF alignment</h3>
+          <p>
+            In the line-of-sight region the SDF must be identical whether
+            trained from vision or radar. We render the line-of-sight distance
+            along each ray and minimize the discrepancy, anchoring the entire
+            surface to the correct level.
+          </p>
+          <span class="feature-card-play" aria-hidden="true">
+            <i class="fas fa-play"></i> Watch
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================================================================== -->
+<!-- RESULTS — grid of result cards (click to open 3D modal)             -->
+<!-- =================================================================== -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-title">Results</h2>
+    <p class="section-lead">
+      Click any thumbnail to open the 3D viewer — translucent outer box,
+      solid object inside.
+    </p>
+
+    <!--
+      Static grid. To register a new scene, copy one <article> block and set:
+        data-stl-outside / data-stl-inside  paths to the two STLs
+        data-stl-title                      modal header
+        <video src>                         small turntable video
+    -->
+    <div class="result-grid">
+      <article class="result-card"
+               data-open-stl-modal
+               data-stl-outside="static/meshes/bunnyboxv1_out.ply"
+               data-stl-inside="static/meshes/bunnyboxv1_in.ply"
+               data-stl-title="Bunny — boxv1"
+               data-img-box="static/images/boxv1.jpg"
+               data-img-object="static/images/bunny.png">
+        <video class="result-card-video" autoplay muted loop playsinline preload="auto">
+          <source src="static/videos/bunnyboxv1.mp4" type="video/mp4">
+        </video>
+        <div class="result-card-thumbs" aria-hidden="true">
+          <img src="static/images/boxv1.jpg" alt="">
+          <img src="static/images/bunny.png" alt="">
+        </div>
+        <div class="result-card-body">
+          <h3 class="result-card-title">Bunny — boxv1</h3>
+          <p class="result-card-caption">Box + hidden bunny.</p>
+        </div>
+      </article>
+      <article class="result-card"
+               data-open-stl-modal
+               data-stl-outside="static/meshes/bunnyboxv2_out.ply"
+               data-stl-inside="static/meshes/bunnyboxv2_in.ply"
+               data-stl-title="Bunny — boxv2"
+               data-img-box="static/images/boxv2.jpg"
+               data-img-object="static/images/bunny.png">
+        <video class="result-card-video" autoplay muted loop playsinline preload="auto">
+          <source src="static/videos/bunnyboxv2.mp4" type="video/mp4">
+        </video>
+        <div class="result-card-thumbs" aria-hidden="true">
+          <img src="static/images/boxv2.jpg" alt="">
+          <img src="static/images/bunny.png" alt="">
+        </div>
+        <div class="result-card-body">
+          <h3 class="result-card-title">Bunny — boxv2</h3>
+          <p class="result-card-caption">Box + hidden bunny.</p>
+        </div>
+      </article>
+      <article class="result-card"
+               data-open-stl-modal
+               data-stl-outside="static/meshes/chickenboxv3_out.ply"
+               data-stl-inside="static/meshes/chickenboxv3_in.ply"
+               data-stl-title="Chicken — boxv3"
+               data-img-box="static/images/boxv3.jpg"
+               data-img-object="static/images/chicken.jpg">
+        <video class="result-card-video" autoplay muted loop playsinline preload="auto">
+          <source src="static/videos/chickenboxv3.mp4" type="video/mp4">
+        </video>
+        <div class="result-card-thumbs" aria-hidden="true">
+          <img src="static/images/boxv3.jpg" alt="">
+          <img src="static/images/chicken.jpg" alt="">
+        </div>
+        <div class="result-card-body">
+          <h3 class="result-card-title">Chicken — boxv3</h3>
+          <p class="result-card-caption">Box + hidden chicken.</p>
+        </div>
+      </article>
+      <article class="result-card"
+               data-open-stl-modal
+               data-stl-outside="static/meshes/deerboxv1_out.ply"
+               data-stl-inside="static/meshes/deerboxv1_in.ply"
+               data-stl-title="Deer — boxv1"
+               data-img-box="static/images/boxv1.jpg"
+               data-img-object="static/images/deer.jpg">
+        <video class="result-card-video" autoplay muted loop playsinline preload="auto">
+          <source src="static/videos/deerboxv1.mp4" type="video/mp4">
+        </video>
+        <div class="result-card-thumbs" aria-hidden="true">
+          <img src="static/images/boxv1.jpg" alt="">
+          <img src="static/images/deer.jpg" alt="">
+        </div>
+        <div class="result-card-body">
+          <h3 class="result-card-title">Deer — boxv1</h3>
+          <p class="result-card-caption">Box + hidden deer.</p>
+        </div>
+      </article>
+      <article class="result-card"
+               data-open-stl-modal
+               data-stl-outside="static/meshes/eleboxv3_out.ply"
+               data-stl-inside="static/meshes/eleboxv3_in.ply"
+               data-stl-title="Elephant — boxv3"
+               data-img-box="static/images/boxv3.jpg"
+               data-img-object="static/images/ele.png">
+        <video class="result-card-video" autoplay muted loop playsinline preload="auto">
+          <source src="static/videos/eleboxv3.mp4" type="video/mp4">
+        </video>
+        <div class="result-card-thumbs" aria-hidden="true">
+          <img src="static/images/boxv3.jpg" alt="">
+          <img src="static/images/ele.png" alt="">
+        </div>
+        <div class="result-card-body">
+          <h3 class="result-card-title">Elephant — boxv3</h3>
+          <p class="result-card-caption">Box + hidden elephant.</p>
+        </div>
+      </article>
+      <article class="result-card"
+               data-open-stl-modal
+               data-stl-outside="static/meshes/kiwiboxv3_out.ply"
+               data-stl-inside="static/meshes/kiwiboxv3_in.ply"
+               data-stl-title="Kiwi Bird — boxv3"
+               data-img-box="static/images/boxv3.jpg"
+               data-img-object="static/images/kiwi.jpg">
+        <video class="result-card-video" autoplay muted loop playsinline preload="auto">
+          <source src="static/videos/kiwiboxv3.mp4" type="video/mp4">
+        </video>
+        <div class="result-card-thumbs" aria-hidden="true">
+          <img src="static/images/boxv3.jpg" alt="">
+          <img src="static/images/kiwi.jpg" alt="">
+        </div>
+        <div class="result-card-body">
+          <h3 class="result-card-title">Kiwi Bird — boxv3</h3>
+          <p class="result-card-caption">Box + hidden kiwi bird.</p>
+        </div>
+      </article>
+      <article class="result-card"
+               data-open-stl-modal
+               data-stl-outside="static/meshes/ballboxv3_out.ply"
+               data-stl-inside="static/meshes/ballboxv3_in.ply"
+               data-stl-title="Ball — boxv3"
+               data-img-box="static/images/boxv3.jpg"
+               data-img-object="static/images/ball.jpg">
+        <video class="result-card-video" autoplay muted loop playsinline preload="auto">
+          <source src="static/videos/ballboxv3.mp4" type="video/mp4">
+        </video>
+        <div class="result-card-thumbs" aria-hidden="true">
+          <img src="static/images/boxv3.jpg" alt="">
+          <img src="static/images/ball.jpg" alt="">
+        </div>
+        <div class="result-card-body">
+          <h3 class="result-card-title">Ball — boxv3</h3>
+          <p class="result-card-caption">Box + hidden ball.</p>
+        </div>
+      </article>
+      <article class="result-card"
+               data-open-stl-modal
+               data-stl-outside="static/meshes/boatboxv3_out.ply"
+               data-stl-inside="static/meshes/boatboxv3_in.ply"
+               data-stl-title="Boat — boxv3"
+               data-img-box="static/images/boxv3.jpg"
+               data-img-object="static/images/boat.png">
+        <video class="result-card-video" autoplay muted loop playsinline preload="auto">
+          <source src="static/videos/boatboxv3.mp4" type="video/mp4">
+        </video>
+        <div class="result-card-thumbs" aria-hidden="true">
+          <img src="static/images/boxv3.jpg" alt="">
+          <img src="static/images/boat.png" alt="">
+        </div>
+        <div class="result-card-body">
+          <h3 class="result-card-title">Boat — boxv3</h3>
+          <p class="result-card-caption">Box + hidden boat.</p>
+        </div>
+      </article>
+      <!-- Add more <article class="result-card"> ... </article> here. -->
+    </div>
+  </div>
+</section>
+
+<!-- =================================================================== -->
+<!-- BIBTEX                                                              -->
+<!-- =================================================================== -->
+<section class="section section-alt">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-title">BibTeX</h2>
+
+    <h3 class="bibtex-heading" id="bibtex-stb">
+      <span class="venue-badge venue-cvpr">CVPR 2026</span>
+      GeRaF 2.0
+    </h3>
+    <div class="bibtex-block">
+      <button class="copy-button" data-target="bibtex-stb-code" aria-label="Copy BibTeX">
+        <i class="fas fa-copy"></i> Copy
+      </button>
+<pre><code id="bibtex-stb-code">@inproceedings{lu2026seeing,
+  title     = {Seeing through boxes: Non-Line-of-Sight 3D Reconstruction from Radar Signals},
+  author    = {Lu, Jiachen and Shanbhag, Hailan and Al Hassanieh, Haitham},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2026}
+}</code></pre>
+    </div>
+
+    <h3 class="bibtex-heading" id="bibtex-geraf">
+      <span class="venue-badge venue-neurips">NeurIPS 2025</span>
+      GeRaF 1.0
+    </h3>
+    <div class="bibtex-block">
+      <button class="copy-button" data-target="bibtex-geraf-code" aria-label="Copy BibTeX">
+        <i class="fas fa-copy"></i> Copy
+      </button>
+<pre><code id="bibtex-geraf-code">@inproceedings{lu2025geraf,
+  title     = {GeRaF: Neural Geometry Reconstruction from Radio-Frequency Signals},
+  author    = {Lu, Jiachen and Shanbhag, Hailan and Al Hassanieh, Haitham},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year      = {2025}
+}</code></pre>
+    </div>
+  </div>
+</section>
+
+<!-- =================================================================== -->
+<!-- ACKNOWLEDGEMENTS                                                    -->
+<!-- =================================================================== -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-4 section-title">Acknowledgements</h2>
+    <div class="content acknowledgement-text">
+      <p>
+        This work was supported by the <b>Sony Faculty Innovation Fellowship</b>.
+        This page is built on the
+        <a href="https://github.com/eliahuhorwitz/Academic-project-page-template">academic
+        project page template</a>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- =================================================================== -->
+<!-- FOOTER                                                              -->
+<!-- =================================================================== -->
+<footer class="footer">
+  <div class="container has-text-centered">
+    <p>
+      &copy; 2026 GeRaF 2.0. Content licensed under
+      <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.
+    </p>
+  </div>
+</footer>
+
+<!-- =================================================================== -->
+<!-- 3D VIEWER MODAL                                                     -->
+<!-- =================================================================== -->
+<!-- Single modal, reused by any element with data-open-stl-modal. -->
+<div id="stl-modal" class="stl-modal" aria-hidden="true" role="dialog" aria-modal="true"
+     aria-labelledby="stl-modal-title">
+  <div class="stl-modal-backdrop" data-close-stl-modal></div>
+  <div class="stl-modal-window" role="document">
+    <header class="stl-modal-header">
+      <h3 class="stl-modal-title" id="stl-modal-title">3D viewer</h3>
+      <button class="stl-modal-close" data-close-stl-modal aria-label="Close">
+        <i class="fas fa-times"></i>
+      </button>
+    </header>
+    <div class="stl-modal-body">
+      <!-- Left: stage that swaps between mesh / box / object panes -->
+      <div class="stl-modal-stage" id="stl-modal-stage">
+        <div class="stl-modal-pane is-active" data-pane="mesh">
+          <div class="stl-modal-viewer" id="stl-modal-viewer"></div>
+        </div>
+        <div class="stl-modal-pane" data-pane="box">
+          <img id="stl-modal-pane-box" alt="Box reference">
+        </div>
+        <div class="stl-modal-pane" data-pane="object">
+          <img id="stl-modal-pane-object" alt="Object reference">
+        </div>
+      </div>
+      <!-- Right: picker — click to swap what shows on the left -->
+      <aside class="stl-modal-picker" id="stl-modal-picker">
+        <button class="stl-modal-pick is-active" data-pick="mesh" type="button">
+          <span class="pick-thumb pick-thumb-mesh"><i class="fas fa-cube"></i></span>
+          <span class="pick-label">3D Mesh</span>
+        </button>
+        <button class="stl-modal-pick" data-pick="box" type="button">
+          <span class="pick-thumb"><img id="stl-modal-pick-box" alt=""></span>
+          <span class="pick-label">Box</span>
+        </button>
+        <button class="stl-modal-pick" data-pick="object" type="button">
+          <span class="pick-thumb"><img id="stl-modal-pick-object" alt=""></span>
+          <span class="pick-label">Object</span>
+        </button>
+      </aside>
+    </div>
+    <div class="stl-modal-toolbar" id="stl-modal-toolbar">
+      <button class="stl-modal-toolbar-btn" data-toggle="outside">
+        <span class="dot dot-outside"></span> Box (transparent)
+      </button>
+      <button class="stl-modal-toolbar-btn" data-toggle="inside">
+        <span class="dot dot-inside"></span> Inside object
+      </button>
+      <button class="stl-modal-toolbar-btn" data-toggle="autorotate">
+        <i class="fas fa-sync"></i> Auto-rotate
+      </button>
+      <p class="stl-modal-hint">Drag · scroll · right-click to pan · Esc to close</p>
+    </div>
+  </div>
+</div>
+
+<!-- =================================================================== -->
+<!-- VIDEO MODAL                                                         -->
+<!-- =================================================================== -->
+<!-- Single floating window reused by any element with data-open-video-modal. -->
+<div id="video-modal" class="video-modal" aria-hidden="true" role="dialog"
+     aria-modal="true" aria-labelledby="video-modal-title">
+  <div class="video-modal-backdrop" data-close-video-modal></div>
+  <div class="video-modal-window" role="document">
+    <header class="video-modal-header">
+      <h3 class="video-modal-title" id="video-modal-title">Video</h3>
+      <button class="video-modal-close" data-close-video-modal aria-label="Close">
+        <i class="fas fa-times"></i>
+      </button>
+    </header>
+    <div class="video-modal-body">
+      <video id="video-modal-player" controls autoplay playsinline></video>
+    </div>
+  </div>
+</div>
+
+<!-- Hover-zoom preview for result-card thumbnails (positioned via JS). -->
+<div id="thumb-preview" class="thumb-preview" aria-hidden="true">
+  <img alt="">
+</div>
+
+<script src="static/js/index.js"></script>
+<script type="module" src="static/js/stl-viewer.js"></script>
+</body>
+</html>

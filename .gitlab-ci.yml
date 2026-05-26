@@ -1,0 +1,15 @@
+# GitLab Pages: copies the site into `public/` and publishes it as an
+# artifact. The `pages` job name is special — GitLab recognises it and
+# deploys the artifact to https://<group>.pages.epfl.ch/<…>/<project>/
+pages:
+  stage: deploy
+  image: alpine:latest
+  script:
+    - mkdir -p public
+    - cp -r index.html static public/
+  artifacts:
+    paths:
+      - public
+    expire_in: 30 days
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH

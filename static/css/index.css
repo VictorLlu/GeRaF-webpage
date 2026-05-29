@@ -252,8 +252,11 @@ a:hover { color: var(--accent-dark); text-decoration: underline; }
   color: #fff !important;
   font-weight: 600;
   font-size: 0.95rem;
+  font-family: inherit;
   padding: 0.6rem 1.15rem;
+  border: none;
   border-radius: 999px;
+  cursor: pointer;
   transition: transform 0.12s ease, background 0.12s ease;
 }
 .link-button:hover {
@@ -979,6 +982,116 @@ a:hover { color: var(--accent-dark); text-decoration: underline; }
 }
 
 body.has-modal-open { overflow: hidden; }
+
+/* ---------- code access modal ------------------------------------ */
+.code-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: none;
+}
+.code-modal.is-open {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.code-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  cursor: zoom-out;
+}
+.code-modal-window {
+  position: relative;
+  width: min(440px, 92vw);
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+  animation: stl-modal-in 0.18s ease-out;
+}
+.code-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+.code-modal-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+.code-modal-close {
+  background: #f1f5f9;
+  color: var(--ink-soft);
+  border: none;
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+.code-modal-close:hover { background: #e2e8f0; }
+.code-modal-body { padding: 1.25rem; }
+.code-modal-intro {
+  margin: 0 0 1rem;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+.code-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.7rem 0.85rem;
+  margin-bottom: 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--ink);
+  transition: border-color 0.12s ease, background 0.12s ease;
+}
+.code-check:hover { background: #f8fafc; }
+.code-check:has(input:checked) {
+  border-color: var(--accent);
+  background: rgba(37, 99, 235, 0.06);
+}
+.code-check input {
+  width: 18px; height: 18px;
+  margin-top: 0.1rem;
+  accent-color: var(--accent);
+  flex: 0 0 auto;
+  cursor: pointer;
+}
+.code-modal-confirm {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.7rem 1rem;
+  border: none;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.12s ease, opacity 0.12s ease;
+}
+.code-modal-confirm:hover:not(:disabled) { background: var(--accent-dark); }
+.code-modal-confirm:disabled { opacity: 0.45; cursor: not-allowed; }
+.code-modal-result {
+  margin-top: 0.5rem;
+  text-align: center;
+}
+.code-modal-result p {
+  margin: 0 0 0.75rem;
+  color: var(--ink);
+  font-size: 0.95rem;
+}
+.code-modal-repo { font-size: 0.9rem; }
 
 /* ---------- video modal (used by Method feature cards) ----------- */
 .video-modal {

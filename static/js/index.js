@@ -11,7 +11,67 @@ document.addEventListener('DOMContentLoaded', function () {
   initBibtexCopy();
   initVideoModal();
   initThumbHoverPreview();
+  initCodeModal();
 });
+
+/* ---------- code access modal -------------------------------------
+   Click a "Code" button → modal with two confirmation checkboxes.
+   The confirm button enables only when both are ticked; confirming
+   reveals the GitHub link. No personal data is collected.
+   ------------------------------------------------------------------ */
+function initCodeModal() {
+  const modal   = document.getElementById('code-modal');
+  if (!modal) return;
+  const cb1     = document.getElementById('code-check-noncommercial');
+  const cb2     = document.getElementById('code-check-cite');
+  const confirm = document.getElementById('code-modal-confirm');
+  const result  = document.getElementById('code-modal-result');
+
+  function open() {
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('has-modal-open');
+  }
+  function close() {
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('has-modal-open');
+  }
+  function reset() {
+    cb1.checked = false;
+    cb2.checked = false;
+    confirm.disabled = true;
+    confirm.hidden = false;
+    result.hidden = true;
+  }
+  function syncConfirm() {
+    confirm.disabled = !(cb1.checked && cb2.checked);
+  }
+
+  // open triggers (delegated)
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('[data-open-code-modal]')) {
+      e.preventDefault();
+      reset();
+      open();
+    }
+  });
+  // close triggers
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('[data-close-code-modal]')) close();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && modal.classList.contains('is-open')) close();
+  });
+
+  cb1.addEventListener('change', syncConfirm);
+  cb2.addEventListener('change', syncConfirm);
+  confirm.addEventListener('click', function () {
+    if (confirm.disabled) return;
+    confirm.hidden = true;
+    result.hidden = false;
+  });
+}
 
 /* ---------- result-card thumb hover preview -----------------------
    On hover over a top-right thumbnail in a result card, show a larger
